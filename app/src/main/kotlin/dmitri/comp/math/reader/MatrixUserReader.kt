@@ -1,36 +1,35 @@
 package dmitri.comp.math.reader
 
-import java.util.Scanner
 import dmitri.comp.math.entity.Matrix
+import java.util.*
+import kotlin.jvm.Throws
 
-class MatrixUserReader(val scanner : Scanner) : UserReader<Matrix> {
-    
-    override public fun read() : Matrix {
-        println("type size")
-        var size : Int = readSize()
-        println("type matrix")
-        var matrix : Matrix = readMatrix(size)
-        return matrix
+class MatrixUserReader(private var scanner : Scanner) : UserReader<Matrix> {
+
+    @Throws(InputMismatchException::class, NoSuchElementException::class)
+    override fun read(): Matrix {
+        val size = readSize()
+        return Matrix(size, readMatrix(size))
     }
 
+    @Throws(InputMismatchException::class, NoSuchElementException::class)
     private fun readSize() : Int {
-        return scanner.nextInt()
-        //todo safe read
+        var result =  scanner.nextInt()
+        return result
     }
 
-    private fun readMatrix(size : Int) : Matrix {
-        var result : Array<Array<Int>> = arrayOf<Array<Int>>()
-        var i : Int = 0
-        for (i; i < size; i++) {
-            var row : Array<Int> = arrayOf<Int>()
-            var j : Int = 0
-            for (j; j < size + 1; j++) {
-                var x : Int = scanner.nextInt()
+    @Throws(InputMismatchException::class, NoSuchElementException::class)
+    private fun readMatrix(size : Int) : Array<Array<Double>> {
+        var result : Array<Array<Double>> = arrayOf()
+        for (i in 0 until size) {
+            var row : Array<Double> = arrayOf()
+            for (j in 0..size) {
+                var x = scanner.nextDouble()
                 row += x
             }    
             result += row
         }
+        return result
         //todo safe
-        return Matrix(1, arrayOf(arrayOf(1, 2, 3)))
     }
 }
