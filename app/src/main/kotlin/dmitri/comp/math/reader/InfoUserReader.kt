@@ -17,6 +17,12 @@ class InfoUserReader(private var scanner: Scanner) : UserReader<UserInfo> {
         return result
     }
 
+    @Throws(InputMismatchException::class, NoSuchElementException::class)
+    fun readSize() : Int {
+        var result =  scanner.nextInt()
+        return result
+    }
+
     @Throws(NoSuchElementException::class)
     fun readFilename() : String {
         var result : String = ""

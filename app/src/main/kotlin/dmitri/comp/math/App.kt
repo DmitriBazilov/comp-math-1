@@ -1,15 +1,21 @@
 package dmitri.comp.math
 
+import dmitri.comp.math.entity.Matrix
 import dmitri.comp.math.reader.InfoUserReader
+import dmitri.comp.math.reader.MatrixUserReader
+import dmitri.comp.math.util.InfoPrinter
+import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.util.*
+import kotlin.NoSuchElementException
 
 class App {
 
     var mode : Int? = 0
     var scanner : Scanner = Scanner(System.`in`)
     var filename : String? = null
+    var  size : Int = -1
     val greeting: String
         get() {
             return "Привет. Откуда будем считывать матрицу? (1: файл, 2: консоль) : "
@@ -18,6 +24,16 @@ class App {
     val inputFilename: String
         get() {
             return "Введите путь до файла : "
+        }
+
+    val inputSize: String
+        get() {
+            return "Введите размер матрицы (1..20) : "
+        }
+
+    val inputMatrix: String
+        get() {
+            return "Введите матрицу : "
         }
 
     fun start() {
@@ -56,6 +72,36 @@ class App {
                     return
                 }
             } while (filename == null)
+            print(inputSize)
+            do {
+                try {
+                    var userSize: Int = infoReader.readSize()
+                    if (userSize !in 1..20) {
+                        println("Введите размер от 1 до 20")
+                    } else {
+                        size = userSize
+                    }
+
+                } catch (badInputException : InputMismatchException) {
+                    println("Пожалуйста введите число от 1 до 20")
+                    scanner.nextLine()
+                } catch (eofException : NoSuchElementException) {
+                    println("Ввод был прерван. Завершение программы")
+                    scanner.close()
+                    return
+                }
+            } while (size == -1)
+
+            val file = File(filename!!)
+            scanner = Scanner(file)
+
+            val fileMatrixReader : MatrixUserReader = MatrixUserReader(scanner)
+            val matrix : Array<Array<Double>> = fileMatrixReader.readMatrix(size)
+            val infoPrinter : InfoPrinter = InfoPrinter()
+            infoPrinter.printMatrix(Matrix(size, matrix))
+
+        } else if (mode == 2) {
+
         }
 
 

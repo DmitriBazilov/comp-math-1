@@ -8,18 +8,18 @@ class MatrixUserReader(private var scanner : Scanner) : UserReader<Matrix> {
 
     @Throws(InputMismatchException::class, NoSuchElementException::class)
     override fun read(): Matrix {
-        val size = readSize()
+        val size : Int = readSize()
         return Matrix(size, readMatrix(size))
     }
 
     @Throws(InputMismatchException::class, NoSuchElementException::class)
-    private fun readSize() : Int {
+    fun readSize() : Int {
         var result =  scanner.nextInt()
         return result
     }
 
     @Throws(InputMismatchException::class, NoSuchElementException::class)
-    private fun readMatrix(size : Int) : Array<Array<Double>> {
+     fun readMatrix(size : Int) : Array<Array<Double>> {
         var result : Array<Array<Double>> = arrayOf()
         for (i in 0 until size) {
             var row : Array<Double> = arrayOf()
