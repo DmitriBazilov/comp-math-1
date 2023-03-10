@@ -101,6 +101,31 @@ class App {
             infoPrinter.printMatrix(Matrix(size, matrix))
 
         } else if (mode == 2) {
+            print(inputSize)
+            do {
+                try {
+                    var userSize: Int = infoReader.readSize()
+                    if (userSize !in 1..20) {
+                        println("Введите размер от 1 до 20")
+                    } else {
+                        size = userSize
+                    }
+
+                } catch (badInputException : InputMismatchException) {
+                    println("Пожалуйста введите число от 1 до 20")
+                    scanner.nextLine()
+                } catch (eofException : NoSuchElementException) {
+                    println("Ввод был прерван. Завершение программы")
+                    scanner.close()
+                    return
+                }
+            } while (size == -1)
+
+            val consoleMatrixReader : MatrixUserReader = MatrixUserReader(scanner)
+            println(inputMatrix)
+            val matrix : Array<Array<Double>> = consoleMatrixReader.readMatrix(size)
+            val infoPrinter : InfoPrinter = InfoPrinter()
+            infoPrinter.printMatrix(Matrix(size, matrix))
 
         }
 
