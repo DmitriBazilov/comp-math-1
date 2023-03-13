@@ -16,6 +16,12 @@ data class Matrix(val size : Int, val matrix : Array<Array<Double>>) {
         return result
     }
 
+    public fun swapLines(first : Int, second : Int) {
+        val tmp = matrix[first]
+        matrix[first] = matrix[second]
+        matrix[second] = tmp
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

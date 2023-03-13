@@ -9,8 +9,13 @@ class GaussSLAESolver : SLAESolver<SLAEAnswer> {
         val size = matrix.size
 
         for (i in 0 until size) {
+            var k = i + 1
+            while (matrix.matrix[i][i] == 0.0 && k < size) {
+                matrix.swapLines(i, k)
+                k++
+            }
             if (matrix.matrix[i][i] == 0.0) {
-                //todo replace rows
+                return SLAEAnswer(-1)
             }
 
             for (j in i + 1 .. size) {
@@ -20,6 +25,8 @@ class GaussSLAESolver : SLAESolver<SLAEAnswer> {
 
             }
         }
+
+        TODO("need to add reverse")
 
 
         return null
