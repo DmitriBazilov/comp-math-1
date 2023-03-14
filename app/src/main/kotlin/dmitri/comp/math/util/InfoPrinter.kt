@@ -25,6 +25,14 @@ class InfoPrinter {
         println()
     }
 
+    public fun <T> printArray(array: Array<T>, delimiter : String) {
+        for (i in array.indices) {
+            print(array[i])
+            print(delimiter)
+        }
+        println()
+    }
+
     public fun printSLAEAnswer(answer : SLAEAnswer) {
         println(answer.status.message)
         printDelimiter()
@@ -37,12 +45,8 @@ class InfoPrinter {
             print("Корни системы: ")
             printArray <Double> (answer.roots!!.toTypedArray())
             printDelimiter()
-            print("Невязки: ")
-            for (disc in answer.discrepancies!!) {
-                val b = BigDecimal(disc)
-                print(b)
-                print(" ")
-            }
+            println("Невязки: ")
+            printArray<String>(answer.discrepancies!!, '\n'.toString())
             println()
 //            printArray <Double> (answer.discrepancies!!.toTypedArray())
         }

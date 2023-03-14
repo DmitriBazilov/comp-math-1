@@ -11,5 +11,5 @@ class SLAEAnswer(val status : GaussResult) {
     var roots : DoubleArray? = null
     var det : Double? = null
     var triangleMatrix : Matrix? = null
-    var discrepancies : DoubleArray? = null
+    var discrepancies : Array<String>? = null
 }
