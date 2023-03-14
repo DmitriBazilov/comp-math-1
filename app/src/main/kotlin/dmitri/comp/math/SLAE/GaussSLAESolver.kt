@@ -27,7 +27,7 @@ class GaussSLAESolver : SLAESolver<SLAEAnswer> {
 
             }
         }
-        var roots : DoubleArray = DoubleArray(size)
+        var roots = DoubleArray(size)
 
         for (i in size - 1 downTo  0) {
             var sum = 0.0
@@ -50,7 +50,7 @@ class GaussSLAESolver : SLAESolver<SLAEAnswer> {
         return null
     }
 
-    fun getDiscrepancies(matrix: Matrix, roots: DoubleArray) : DoubleArray? {
+    private fun getDiscrepancies(matrix: Matrix, roots: DoubleArray) : DoubleArray {
         var discrepancies = DoubleArray(matrix.size) {0.0}
         for (i in 0 until matrix.size) {
             var sum = 0.0
@@ -62,7 +62,7 @@ class GaussSLAESolver : SLAESolver<SLAEAnswer> {
         return discrepancies
     }
 
-    fun getDetFromTriangle(matrix: Matrix) : Double {
+    private fun getDetFromTriangle(matrix: Matrix) : Double {
         var det = 1.0
         for (i in 0 until matrix.size) {
             det *= matrix.matrix[i][i]

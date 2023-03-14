@@ -23,22 +23,23 @@ class App {
             return "Привет. Откуда будем считывать матрицу? (1: файл, 2: консоль) : "
         }
 
-    val inputFilename: String
+    private val inputFilename: String
         get() {
             return "Введите путь до файла : "
         }
 
-    val inputSize: String
+    private val inputSize: String
         get() {
             return "Введите размер матрицы (1..20) : "
         }
 
-    val inputMatrix: String
+    private val inputMatrix: String
         get() {
             return "Введите матрицу : "
         }
 
     fun start() {
+        scanner.useLocale(Locale.US)
         var infoReader = InfoUserReader(scanner)
 
         print(greeting)
@@ -96,6 +97,7 @@ class App {
 
             val file = File(filename!!)
             scanner = Scanner(file)
+            scanner.useLocale(Locale.US)
 
             val fileMatrixReader : MatrixUserReader = MatrixUserReader(scanner)
             val matrix : Array<Array<Double>> = fileMatrixReader.readMatrix(size)
