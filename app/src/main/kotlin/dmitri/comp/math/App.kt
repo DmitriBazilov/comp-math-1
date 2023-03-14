@@ -1,6 +1,8 @@
 package dmitri.comp.math
 
+import dmitri.comp.math.SLAE.GaussSLAESolver
 import dmitri.comp.math.entity.Matrix
+import dmitri.comp.math.entity.SLAEAnswer
 import dmitri.comp.math.reader.InfoUserReader
 import dmitri.comp.math.reader.MatrixUserReader
 import dmitri.comp.math.util.InfoPrinter
@@ -100,6 +102,9 @@ class App {
             val infoPrinter : InfoPrinter = InfoPrinter()
             infoPrinter.printMatrix(Matrix(size, matrix))
 
+            val answer : SLAEAnswer? = GaussSLAESolver().solve(Matrix(size, matrix))
+
+            infoPrinter.printSLAEAnswer(answer!!)
         } else if (mode == 2) {
             print(inputSize)
             do {
@@ -125,10 +130,12 @@ class App {
             println(inputMatrix)
             val matrix : Array<Array<Double>> = consoleMatrixReader.readMatrix(size)
             val infoPrinter : InfoPrinter = InfoPrinter()
-            infoPrinter.printMatrix(Matrix(size, matrix))
+
+            val answer : SLAEAnswer? = GaussSLAESolver().solve(Matrix(size, matrix))
+
+            infoPrinter.printSLAEAnswer(answer!!)
 
         }
-
 
 //        var matrix = MatrixUserReader(null).read()
 //        InfoPrinter().printMatrix(matrix)
