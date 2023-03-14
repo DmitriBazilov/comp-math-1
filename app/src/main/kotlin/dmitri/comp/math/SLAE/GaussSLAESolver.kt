@@ -4,6 +4,7 @@ import dmitri.comp.math.entity.Matrix
 import dmitri.comp.math.entity.SLAEAnswer
 import dmitri.comp.math.util.InfoPrinter
 import java.math.BigDecimal
+import java.text.DecimalFormat
 
 class GaussSLAESolver : SLAESolver<SLAEAnswer> {
 
@@ -60,7 +61,9 @@ class GaussSLAESolver : SLAESolver<SLAEAnswer> {
                  tmp = tmp.plus(tmp2)
             }
 //            println(tmp)
-            discrepancies[i] = tmp.minus(BigDecimal(matrix.matrix[i][matrix.size])).toString()
+            val format : DecimalFormat = DecimalFormat("0.00E00")
+
+            discrepancies[i] = format.format(tmp.minus(BigDecimal(matrix.matrix[i][matrix.size])))
         }
         return discrepancies
     }
