@@ -102,7 +102,9 @@ class App {
             val fileMatrixReader : MatrixUserReader = MatrixUserReader(scanner)
             val matrix : Array<Array<Double>> = fileMatrixReader.readMatrix(size)
             val infoPrinter : InfoPrinter = InfoPrinter()
+            println("Исходная матрица: ")
             infoPrinter.printMatrix(Matrix(size, matrix))
+            infoPrinter.printDelimiter()
 
             val answer : SLAEAnswer? = GaussSLAESolver().solve(Matrix(size, matrix))
 

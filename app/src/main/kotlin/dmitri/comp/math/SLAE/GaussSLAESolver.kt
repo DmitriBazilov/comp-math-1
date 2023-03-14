@@ -54,10 +54,17 @@ class GaussSLAESolver : SLAESolver<SLAEAnswer> {
         var discrepancies = DoubleArray(matrix.size) {0.0}
         for (i in 0 until matrix.size) {
             var sum = 0.0
+            // var tmp : BigDecimal = BigDecimal(0.0)
             for (j in 0 until matrix.size) {
                 sum += matrix.matrix[i][j] * roots[j]
+                // var tmp2 = BigDecimal(matrix.matrix[i][j])
+                // tmp2.multiply(BigDecimal(roots[j]))
+                // print(tmp2)
+                // tmp.add(tmp2)
+                // println(tmp.toDouble())
             }
             discrepancies[i] = matrix.matrix[i][matrix.size] - sum
+            // discrepancies[i] = tmp.toDouble()
         }
         return discrepancies
     }
