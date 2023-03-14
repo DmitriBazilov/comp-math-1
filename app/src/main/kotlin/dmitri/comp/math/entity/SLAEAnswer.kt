@@ -8,6 +8,7 @@ class SLAEAnswer(val status : GaussResult) {
         ZERO_DIAGONAL_ELEMENT("Ноль в главной дигонале, Определитель равен нулю")
     }
 
+    var swaps : Int = 0
     var roots : DoubleArray? = null
     var det : Double? = null
     var triangleMatrix : Matrix? = null

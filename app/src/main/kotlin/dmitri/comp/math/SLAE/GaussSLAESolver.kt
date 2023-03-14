@@ -10,11 +10,13 @@ class GaussSLAESolver : SLAESolver<SLAEAnswer> {
 
     override fun solve(matrix : Matrix): SLAEAnswer? {
         val size = matrix.size
+        var swaps : Int = 0
 
         for (i in 0 until size - 1) {
             var k = i + 1
             while (matrix.matrix[i][i] == 0.0 && k < size) {
                 matrix.swapLines(i, k)
+                swaps++
                 k++
             }
             if (matrix.matrix[i][i] == 0.0) {
@@ -43,6 +45,7 @@ class GaussSLAESolver : SLAESolver<SLAEAnswer> {
 
 
         val answer = SLAEAnswer(SLAEAnswer.GaussResult.OK)
+        answer.swaps = swaps
         answer.roots = roots
         answer.det = getDetFromTriangle(matrix)
         answer.discrepancies = getDiscrepancies(matrix, roots)

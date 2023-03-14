@@ -42,6 +42,8 @@ class InfoPrinter {
             printDelimiter()
             println("Определитель матрицы: " + answer.det)
             printDelimiter()
+            println("Количество перестановок строк: " + answer.swaps)
+            printDelimiter()
             print("Корни системы: ")
             printArray <Double> (answer.roots!!.toTypedArray())
             printDelimiter()
