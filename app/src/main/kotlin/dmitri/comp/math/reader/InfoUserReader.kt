@@ -1,6 +1,7 @@
 package dmitri.comp.math.reader
 
 import dmitri.comp.math.entity.UserInfo
+import dmitri.comp.math.interfaces.UserReader
 import java.util.InputMismatchException
 import java.util.NoSuchElementException
 import java.util.Scanner

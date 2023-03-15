@@ -1,6 +1,7 @@
 package dmitri.comp.math.reader
 
 import dmitri.comp.math.entity.Matrix
+import dmitri.comp.math.interfaces.UserReader
 import java.util.*
 import kotlin.jvm.Throws
 
@@ -30,6 +31,5 @@ class MatrixUserReader(private var scanner : Scanner) : UserReader<Matrix> {
             result += row
         }
         return result
-        //todo safe
-    }
+     }
 }

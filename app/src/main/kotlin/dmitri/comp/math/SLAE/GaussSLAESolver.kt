@@ -2,9 +2,10 @@ package dmitri.comp.math.SLAE
 
 import dmitri.comp.math.entity.Matrix
 import dmitri.comp.math.entity.SLAEAnswer
-import dmitri.comp.math.util.InfoPrinter
+import dmitri.comp.math.interfaces.SLAESolver
 import java.math.BigDecimal
 import java.text.DecimalFormat
+import kotlin.math.pow
 
 class GaussSLAESolver : SLAESolver<SLAEAnswer> {
 
@@ -47,7 +48,7 @@ class GaussSLAESolver : SLAESolver<SLAEAnswer> {
         val answer = SLAEAnswer(SLAEAnswer.GaussResult.OK)
         answer.swaps = swaps
         answer.roots = roots
-        answer.det = getDetFromTriangle(matrix)
+        answer.det = getDetFromTriangle(matrix) * (-1.0).pow(swaps.toDouble())
         answer.discrepancies = getDiscrepancies(matrix, roots)
         answer.triangleMatrix = matrix
         return answer
@@ -64,7 +65,7 @@ class GaussSLAESolver : SLAESolver<SLAEAnswer> {
                  tmp = tmp.plus(tmp2)
             }
 //            println(tmp)
-            val format : DecimalFormat = DecimalFormat("0.00E00")
+            val format : DecimalFormat = DecimalFormat("#.##E0#")
 
             discrepancies[i] = format.format(tmp.minus(BigDecimal(matrix.matrix[i][matrix.size])))
         }

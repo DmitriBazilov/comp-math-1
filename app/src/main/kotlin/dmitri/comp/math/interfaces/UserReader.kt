@@ -1,4 +1,4 @@
-package dmitri.comp.math.reader
+package dmitri.comp.math.interfaces
 
 interface UserReader<T> {
 

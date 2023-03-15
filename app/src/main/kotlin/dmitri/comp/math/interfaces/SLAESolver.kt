@@ -1,4 +1,4 @@
-package dmitri.comp.math.SLAE
+package dmitri.comp.math.interfaces
 
 import dmitri.comp.math.entity.Matrix
 
