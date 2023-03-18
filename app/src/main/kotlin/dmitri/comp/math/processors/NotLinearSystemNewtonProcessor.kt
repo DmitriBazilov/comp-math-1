@@ -7,6 +7,7 @@ import dmitri.comp.math.equation.SecondSystem
 import dmitri.comp.math.interfaces.MethodProcessor
 import dmitri.comp.math.reader.InfoUserReader
 import dmitri.comp.math.solvers.NotLinearSystemNewtonSolver
+import dmitri.comp.math.util.InfoPrinter
 import java.util.*
 import kotlin.NoSuchElementException
 
@@ -69,9 +70,9 @@ class NotLinearSystemNewtonProcessor : MethodProcessor {
         val answer : NewtonSystemAnswer = NotLinearSystemNewtonSolver().solve(
             searchInterval!!,
             if (systemNumber == 1) FirstSystem()
-            else SecondSystem()
-            )
+            else SecondSystem())
 
+        InfoPrinter().printNewtonAnswer(answer)
     }
 
 }
