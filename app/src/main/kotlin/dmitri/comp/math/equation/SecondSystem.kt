@@ -1,10 +1,10 @@
-package dmitri.comp.math.entity
+package dmitri.comp.math.equation
 
 import dmitri.comp.math.interfaces.EquationSystem
 import kotlin.math.cos
 import kotlin.math.sin
 
-class secondSystem : EquationSystem() {
+class SecondSystem : EquationSystem() {
     override val system: String
         get() = " { sin(x) + y - 1 = 0\n<\n { -2x^3 - 4y + 5 = 0"
 

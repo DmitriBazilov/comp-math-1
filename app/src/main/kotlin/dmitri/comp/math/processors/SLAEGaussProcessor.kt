@@ -1,6 +1,6 @@
 package dmitri.comp.math.processors
 
-import dmitri.comp.math.SLAE.GaussSLAESolver
+import dmitri.comp.math.solvers.GaussSLAESolver
 import dmitri.comp.math.entity.Matrix
 import dmitri.comp.math.entity.SLAEAnswer
 import dmitri.comp.math.interfaces.MethodProcessor

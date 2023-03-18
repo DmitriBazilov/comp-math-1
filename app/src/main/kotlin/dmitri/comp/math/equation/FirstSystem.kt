@@ -1,10 +1,9 @@
-package dmitri.comp.math.entity
+package dmitri.comp.math.equation
 
 import dmitri.comp.math.interfaces.EquationSystem
-import java.util.function.BiFunction
 import kotlin.math.pow
 
-class firstSystem : EquationSystem() {
+class FirstSystem : EquationSystem() {
     override val system: String
         get() = " { x^2 + y^2 = 4\n<\n { y = 3x^2"
 

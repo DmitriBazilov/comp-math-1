@@ -1,4 +1,4 @@
-package dmitri.comp.math.SLAE
+package dmitri.comp.math.solvers
 
 import dmitri.comp.math.entity.Matrix
 import dmitri.comp.math.entity.SLAEAnswer

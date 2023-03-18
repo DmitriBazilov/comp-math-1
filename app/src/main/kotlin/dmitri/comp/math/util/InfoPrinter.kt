@@ -1,6 +1,7 @@
 package dmitri.comp.math.util
 
 import dmitri.comp.math.entity.Matrix
+import dmitri.comp.math.entity.NewtonSystemAnswer
 import dmitri.comp.math.entity.SLAEAnswer
 import java.math.BigDecimal
 
@@ -52,5 +53,9 @@ class InfoPrinter {
             println()
 //            printArray <Double> (answer.discrepancies!!.toTypedArray())
         }
+    }
+
+    fun printNewtonAnswer(answer : NewtonSystemAnswer) {
+        println(answer.status)
     }
 }
