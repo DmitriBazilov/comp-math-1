@@ -1,6 +1,12 @@
 package dmitri.comp.math.entity
 
-class NewtonSystemAnswer {
+import dmitri.comp.math.interfaces.EquationSystem
 
-    var status : Int? = null
+class NewtonSystemAnswer(var status : Int) {
+
+    var x : Double? = null
+    var y : Double? = null
+    var i : Int = -1
+    var system : EquationSystem? = null
+    var interval : SearchInterval? = null
 }

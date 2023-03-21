@@ -56,6 +56,10 @@ class InfoPrinter {
     }
 
     fun printNewtonAnswer(answer : NewtonSystemAnswer) {
-        println(answer.status)
+        if (answer.status != 0) {
+            println("Начальное приближение равноудаленно от точек решения")
+        } else {
+            println("Решение системы на данном интервале: " + answer.x + ", " + answer.y)
+        }
     }
 }

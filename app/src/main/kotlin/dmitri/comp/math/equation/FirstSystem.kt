@@ -8,10 +8,10 @@ class FirstSystem : EquationSystem() {
         get() = " { x^2 + y^2 = 4\n<\n { y = 3x^2"
 
     override val firstEquation: (Double, Double) -> Double
-        get() = { x, y -> -(x.pow(2)) - (y.pow(2)) + 4 }
+        get() = { x, y -> 4 - x * x - y * y }
 
     override val secondEquation: (Double, Double) -> Double
-        get() = { x, y -> y + -3 * x.pow(2) }
+        get() = { x, y -> 3 * x * x - y }
 
     override val jacobianEquations: List<List<(Double, Double) -> Double>>
         get() {

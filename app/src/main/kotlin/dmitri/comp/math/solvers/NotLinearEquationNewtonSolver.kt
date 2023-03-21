@@ -8,6 +8,7 @@ import dmitri.comp.math.interfaces.NotLinearEquationSolver
 class NotLinearEquationNewtonSolver : NotLinearEquationSolver<SearchInterval, NotLinearEquationAnswer> {
     override fun solve(interval: SearchInterval, equation: Equation): NotLinearEquationAnswer {
 
+
         return NotLinearEquationAnswer(-1)
     }
 }

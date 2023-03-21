@@ -50,10 +50,9 @@ class NotLinearSystemNewtonProcessor : MethodProcessor {
             try {
                 var userInterval : SearchInterval = infoReader.readInterval()
                 if (userInterval.left !in -100.0..100.0 ||
-                    userInterval.right !in -100.0..100.0 ||
-                    userInterval.right <= userInterval.left) {
+                    userInterval.right !in -100.0..100.0) {
 
-                    print("Введите границы от -100 до 100(левая граница строго меньше правой): ")
+                    print("Введите два числа от -100 до 100: ")
                 } else {
                     searchInterval = userInterval
                 }
