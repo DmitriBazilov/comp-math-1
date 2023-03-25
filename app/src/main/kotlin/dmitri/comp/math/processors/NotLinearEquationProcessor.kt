@@ -20,6 +20,6 @@ class NotLinearEquationProcessor : MethodProcessor {
         }
 
     override fun processMethod() {
-        TODO("Not yet implemented")
+
     }
 }
