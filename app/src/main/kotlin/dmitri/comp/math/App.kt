@@ -1,5 +1,6 @@
 package dmitri.comp.math
 
+import dmitri.comp.math.processors.NotLinearEquationProcessor
 import dmitri.comp.math.processors.NotLinearSystemNewtonProcessor
 import dmitri.comp.math.processors.SLAEGaussProcessor
 import java.util.*
@@ -30,7 +31,7 @@ class App {
         when (method) {
             1 -> SLAEGaussProcessor().processMethod()
             2 -> NotLinearSystemNewtonProcessor().processMethod()
-            else -> TODO()
+            3 -> NotLinearEquationProcessor().processMethod()
         }
     }
     

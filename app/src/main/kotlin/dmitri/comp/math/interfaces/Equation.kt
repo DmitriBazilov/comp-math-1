@@ -4,7 +4,7 @@ interface Equation {
 
     val eq : String;
 
-    fun f(x : Double)
+    fun f(x : Double) : Double
 
-    fun fDerivative(x : Double)
+    fun fDerivative(x : Double) : Double
 }
