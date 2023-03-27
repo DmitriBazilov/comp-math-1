@@ -6,8 +6,7 @@ import dmitri.comp.math.interfaces.Equation
 import dmitri.comp.math.interfaces.NotLinearEquationSolver
 
 class NotLinearEquationSimpleIterationSolver : NotLinearEquationSolver<SearchInterval, NotLinearEquationAnswer> {
-    override fun solve(interval: SearchInterval, equation: Equation): NotLinearEquationAnswer {
-
-        return NotLinearEquationAnswer(-1)
+    override fun solve(interval: SearchInterval, equation: Equation, eps: Double): NotLinearEquationAnswer {
+        TODO()
     }
 }

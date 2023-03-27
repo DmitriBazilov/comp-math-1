@@ -42,4 +42,11 @@ class InfoUserReader(private var scanner: Scanner) : UserReader<UserInfo> {
         var right : Double = scanner.nextDouble()
         return SearchInterval(left, right)
     }
+
+    @Throws(InputMismatchException::class, NoSuchElementException::class)
+    fun readEpsilon() : Double {
+        var eps = scanner.nextDouble()
+        return eps
+    }
+
 }

@@ -12,9 +12,12 @@ import dmitri.comp.math.reader.InfoUserReader
 import dmitri.comp.math.solvers.NotLinearEquationHalfDivisionSolver
 import dmitri.comp.math.solvers.NotLinearEquationNewtonSolver
 import dmitri.comp.math.solvers.NotLinearEquationSimpleIterationSolver
+import dmitri.comp.math.util.IntervalFinder
 import java.util.*
 
 class NotLinearEquationProcessor : MethodProcessor {
+
+    final val MIN_EPS : Double = 1.0E-9
 
     val scanner: Scanner = Scanner(System.`in`)
     val infoReader = InfoUserReader(scanner)
@@ -34,6 +37,8 @@ class NotLinearEquationProcessor : MethodProcessor {
     var methodNumber: Int = 0
     var searchInterval: SearchInterval? = null
     var equationNumber : Int = 0
+    var eps : Double = 0.01
+
 
     private val chooseMethod = "Выберите метод:" +
             "\n\t1. Метод половинных делений" +
@@ -45,8 +50,15 @@ class NotLinearEquationProcessor : MethodProcessor {
     override fun processMethod() {
 
         readMethod()
-        readInterval()
         readEquation()
+
+        suggestInterval()
+
+        readEpsilon()
+
+        val solver = methods[methodNumber]
+
+        solver!!.solve(searchInterval!!, equations[equationNumber], eps)
 
     }
 
@@ -67,6 +79,15 @@ class NotLinearEquationProcessor : MethodProcessor {
                 return
             }
         } while (methodNumber !in 1..3)
+    }
+
+    private fun suggestInterval() {
+        var intervalFinder = IntervalFinder()
+        do {
+            readInterval()
+            var intervals = intervalFinder.findIntervals(equations[equationNumber - 1], searchInterval!!)
+            TODO()
+        } while (true)
     }
 
     private fun readInterval() {
@@ -92,5 +113,45 @@ class NotLinearEquationProcessor : MethodProcessor {
     }
 
     private fun readEquation() {
+        println("Список нелинейных уравнений:")
+        for (idx in equations.indices) {
+            println("\t" + idx + 1 + ". " + equations[idx].eq)
+        }
+        do {
+            print("Выберите уравнение: ")
+            try {
+                var number = infoReader.readMode()
+                if (number in 1..equations.size) {
+                    equationNumber = number
+                }
+            } catch (ex : InputMismatchException) {
+                // TODO: 27.03.2023
+            } catch (ex : NoSuchElementException) {
+                // TODO: 27.03.2023
+            }
+        } while (equationNumber == 0)
+    }
+
+    private fun readEpsilon() {
+
+        do {
+            try {
+                print("Введите требуемую точность(0 - точность по умолчанию): ")
+                var userEps = infoReader.readEpsilon()
+                if (userEps == 0.0) return
+                if (userEps < MIN_EPS) {
+                    println("Введите точность поменьше(eps>1E-9)")
+                } else {
+                    eps = userEps
+                    return
+                }
+            } catch (badInputException: InputMismatchException) {
+                scanner.nextLine()
+            } catch (endOfFileException: NoSuchElementException) {
+                println("Ввод был прерван. Завершение программы")
+                scanner.close()
+                return
+            }
+        } while (true)
     }
 }
