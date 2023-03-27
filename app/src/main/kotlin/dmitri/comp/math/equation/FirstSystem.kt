@@ -2,6 +2,7 @@ package dmitri.comp.math.equation
 
 import dmitri.comp.math.interfaces.EquationSystem
 import kotlin.math.pow
+import kotlin.math.sqrt
 
 class FirstSystem : EquationSystem() {
     override val system: String

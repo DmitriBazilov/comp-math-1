@@ -16,23 +16,25 @@ class App {
         }
 
     fun start() {
-        println(chooseMethod)
-        print("Введите номер: ")
-        var method : Int? = null
         do {
-            var methodString : String = readln().trim()
-            if (methodString != "1" && methodString != "2" && methodString != "3") {
-                print("Некорректный номер. Попробуйте еще раз: ")
-            } else {
-                method = methodString.toInt()
-            }
-        } while (method == null)
+            println(chooseMethod)
+            print("Введите номер: ")
+            var method : Int? = null
+            do {
+                var methodString : String = readln().trim()
+                if (methodString != "1" && methodString != "2" && methodString != "3") {
+                    print("Некорректный номер. Попробуйте еще раз: ")
+                } else {
+                    method = methodString.toInt()
+                }
+            } while (method == null)
 
-        when (method) {
-            1 -> SLAEGaussProcessor().processMethod()
-            2 -> NotLinearSystemNewtonProcessor().processMethod()
-            3 -> NotLinearEquationProcessor().processMethod()
-        }
+            when (method) {
+                1 -> SLAEGaussProcessor().processMethod()
+                2 -> NotLinearSystemNewtonProcessor().processMethod()
+                3 -> NotLinearEquationProcessor().processMethod()
+            }
+        } while (true)
     }
     
 }

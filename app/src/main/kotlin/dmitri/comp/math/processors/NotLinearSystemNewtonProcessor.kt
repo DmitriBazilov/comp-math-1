@@ -4,6 +4,7 @@ import dmitri.comp.math.entity.NewtonSystemAnswer
 import dmitri.comp.math.entity.SearchInterval
 import dmitri.comp.math.equation.FirstSystem
 import dmitri.comp.math.equation.SecondSystem
+import dmitri.comp.math.graphics.GraphicDrawer
 import dmitri.comp.math.interfaces.MethodProcessor
 import dmitri.comp.math.reader.InfoUserReader
 import dmitri.comp.math.solvers.NotLinearSystemNewtonSolver
@@ -72,6 +73,8 @@ class NotLinearSystemNewtonProcessor : MethodProcessor {
             else SecondSystem())
 
         InfoPrinter().printNewtonAnswer(answer)
+
+        GraphicDrawer().showSystem(answer)
     }
 
 }

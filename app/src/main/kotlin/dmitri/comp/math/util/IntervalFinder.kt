@@ -15,8 +15,9 @@ class IntervalFinder {
             var left = eq.f(i - 0.5)
             var right = eq.f(i)
             if (left * right <= 0.0) {
-                answer.add(SearchInterval(left, right))
+                answer.add(SearchInterval(i - 0.5, i))
             }
+            i += 0.5
         }
         return answer
     }

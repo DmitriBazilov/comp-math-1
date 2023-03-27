@@ -11,4 +11,8 @@ class QuadraticEquation(override val eq: String = "x^2 - 8*x + 9") : Equation {
     override fun fDerivative(x: Double) : Double {
         return 2 * x - 8
     }
+
+    override fun fDerivativeDerivative(x: Double): Double {
+        return 2.0
+    }
 }

@@ -10,4 +10,8 @@ class ThirdDegreeEquation(override val eq: String = "x^3 + 2,28*x^2 − 1,934*x 
     override fun fDerivative(x: Double): Double {
         return 3 * x * x + 2 * 2.28 * x - 1.934
     }
+
+    override fun fDerivativeDerivative(x: Double): Double {
+        return 6.0 * x + 2 * 2.28
+    }
 }

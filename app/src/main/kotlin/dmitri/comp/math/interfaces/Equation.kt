@@ -2,9 +2,11 @@ package dmitri.comp.math.interfaces
 
 interface Equation {
 
-    val eq : String;
+    val eq: String;
 
-    fun f(x : Double) : Double
+    fun f(x: Double): Double
 
-    fun fDerivative(x : Double) : Double
+    fun fDerivative(x: Double): Double
+
+    fun fDerivativeDerivative(x: Double): Double
 }

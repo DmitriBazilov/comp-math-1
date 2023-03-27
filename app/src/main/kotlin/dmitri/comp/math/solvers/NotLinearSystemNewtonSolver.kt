@@ -7,18 +7,22 @@ import dmitri.comp.math.entity.SearchInterval
 import dmitri.comp.math.interfaces.EquationSystem
 import dmitri.comp.math.interfaces.NotLinearSystemSolver
 import kotlin.math.abs
+import javax.swing.*;
+import java.awt.*;
+import java.awt.geom.CubicCurve2D
+import java.awt.geom.Line2D
 
 class NotLinearSystemNewtonSolver : NotLinearSystemSolver<SearchInterval, NewtonSystemAnswer> {
 
     override fun solve(interval: SearchInterval, system: EquationSystem): NewtonSystemAnswer {
-//        TODO("Not yet implemented")
-
+        
         val answer : NewtonSystemAnswer = NewtonSystemAnswer(0)
 
         var x0 = interval.left
         var y0 = interval.right
 
-        val eps = 0.01f
+        val eps = 0.1f
+        //todo
 
         val je = system.jacobianEquations
 

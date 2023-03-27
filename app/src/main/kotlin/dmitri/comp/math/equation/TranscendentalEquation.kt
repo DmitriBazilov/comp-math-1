@@ -12,4 +12,8 @@ class TranscendentalEquation(override val eq: String = "sin(2x) + cos(x) = 0") :
     override fun fDerivative(x: Double): Double {
         return 2 * cos(2 * x) - sin(x)
     }
+
+    override fun fDerivativeDerivative(x: Double): Double {
+        return -4.0 * sin(2 * x) - cos(x)
+    }
 }
