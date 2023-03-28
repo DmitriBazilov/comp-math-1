@@ -14,7 +14,8 @@ class GraphicDrawer {
 
         // create your PlotPanel (you can use it as a JPanel)
         val plot = Plot2DPanel()
-        addEquationOnGraph(plot,
+        addEquationOnGraph(
+            plot,
             { x: Double?, y: Double? ->
                 answer.equation.f(
                     x!!
@@ -48,7 +49,7 @@ class GraphicDrawer {
     }
 
     private fun addEquationOnGraph(plot: Plot2DPanel, f: (Double, Double) -> Double, interval: SearchInterval) {
-        val x = DoubleArray(60)
+        val x = DoubleArray(80)
         val y = DoubleArray(60)
         var start: Double = interval.left - 0.5
         for (i in 0..59) {
@@ -66,5 +67,4 @@ class GraphicDrawer {
         addEquationOnGraph(plot, system::firstEquation.get(), interval)
         addEquationOnGraph(plot, system::secondEquation.get(), interval)
     }
-
 }

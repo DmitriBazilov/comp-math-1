@@ -1,5 +1,6 @@
 package dmitri.comp.math
 
+import dmitri.comp.math.processors.IntegralProcessor
 import dmitri.comp.math.processors.NotLinearEquationProcessor
 import dmitri.comp.math.processors.NotLinearSystemNewtonProcessor
 import dmitri.comp.math.processors.SLAEGaussProcessor
@@ -22,8 +23,9 @@ class App {
             var method : Int? = null
             do {
                 var methodString : String = readln().trim()
-                if (methodString != "1" && methodString != "2" && methodString != "3") {
-                    print("Некорректный номер. Попробуйте еще раз: ")
+                if (methodString != "1" && methodString != "2" &&
+                    methodString != "3" && methodString != "4") {
+                        print("Некорректный номер. Попробуйте еще раз: ")
                 } else {
                     method = methodString.toInt()
                 }
@@ -33,6 +35,7 @@ class App {
                 1 -> SLAEGaussProcessor().processMethod()
                 2 -> NotLinearSystemNewtonProcessor().processMethod()
                 3 -> NotLinearEquationProcessor().processMethod()
+                4 -> IntegralProcessor().processMethod()
             }
         } while (true)
     }
