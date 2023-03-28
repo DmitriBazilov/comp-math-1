@@ -6,7 +6,7 @@ import kotlin.math.sqrt
 
 class FirstSystem : EquationSystem() {
     override val system: String
-        get() = " { x^2 + y^2 = 4\n<\n { y = 3x^2"
+        get() = " { x^2 - 4 = y^2\n<\n { y = 3x^2"
 
     override val firstEquation: (Double, Double) -> Double
         get() = { x, y -> 4 - x * x - y * y }

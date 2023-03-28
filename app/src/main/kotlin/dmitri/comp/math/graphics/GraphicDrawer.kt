@@ -38,8 +38,29 @@ class GraphicDrawer {
 
 
 //        Point2D point2D = new Point2D.Double(answer.getX(), 0);
-        addSystemOnGraph(plot, answer.system!!, answer.interval!!)
+//        addSystemOnGraph(plot, answer.system!!, SearchInterval(-4.0, 4.0))
+        var x = DoubleArray(1000)
+        var y = DoubleArray(1000)
+        var start: Double = -2.5
+        for (i in 0..999) {
+            x[i] = start
+            y[i] = answer.system!!.firstEquation.invoke(start, 0.0)
+            start += 0.005
+        }
+        plot.addLinePlot("", Color.BLUE, x, y)
+        x = DoubleArray(1000)
+        y = DoubleArray(1000)
+        start = -2.5
+        for (i in 0..999) {
+            x[i] = start
+            y[i] = answer.system!!.secondEquation.invoke(start, 0.0)
+            start += 0.005
+        }
+        plot.addLinePlot("", Color.BLUE, x, y)
 
+        val x0 = doubleArrayOf(-2.5, 0.0)
+        val y0 = doubleArrayOf(2.5, 0.0)
+        plot.addLinePlot("y=0", Color.DARK_GRAY, x0, y0)
         // put the PlotPanel in a JFrame, as a JPanel
         val frame = JFrame("Ответ")
         frame.setSize(800, 600)
@@ -48,17 +69,17 @@ class GraphicDrawer {
     }
 
     private fun addEquationOnGraph(plot: Plot2DPanel, f: (Double, Double) -> Double, interval: SearchInterval) {
-        val x = DoubleArray(60)
-        val y = DoubleArray(60)
-        var start: Double = interval.left - 0.5
-        for (i in 0..59) {
+        val x = DoubleArray(1000)
+        val y = DoubleArray(1000)
+        var start: Double = -5.0
+        for (i in 0..999) {
             x[i] = start
             y[i] = f.invoke(start, 0.0)
-            start += 0.05
+            start += 0.01
         }
         plot.addLinePlot("", Color.BLUE, x, y)
-        val x0 = doubleArrayOf(interval.left - 2, 0.0)
-        val y0 = doubleArrayOf(interval.right + 2, 0.0)
+        val x0 = doubleArrayOf(-5.0, 0.0)
+        val y0 = doubleArrayOf(5.0, 0.0)
         plot.addLinePlot("y=0", Color.DARK_GRAY, x0, y0)
     }
 

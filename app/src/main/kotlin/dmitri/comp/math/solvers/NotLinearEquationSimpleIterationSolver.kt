@@ -13,7 +13,10 @@ class NotLinearEquationSimpleIterationSolver : NotLinearEquationSolver<SearchInt
         var aDer = equation.fDerivative(a)
         var bDer = equation.fDerivative(b)
         var lambda = -1.0 / java.lang.Double.max(aDer, bDer)
-        var x0 = b
+        println("proizv phi: " + fiDer(a, equation, lambda))
+        println("proizv phi: " + fiDer(b, equation, lambda))
+
+        var x0 = a
         var x1 = fi(x0, equation, lambda)
         var count = 0
         do {
@@ -31,4 +34,7 @@ class NotLinearEquationSimpleIterationSolver : NotLinearEquationSolver<SearchInt
     private fun fi(x: Double, equation: Equation, lambda: Double): Double {
         return x + lambda * equation.f(x)
     }
-}
+
+    private fun fiDer(x: Double, equation: Equation, lambda: Double): Double {
+        return 1 + lambda * equation.fDerivative(x)
+    }}

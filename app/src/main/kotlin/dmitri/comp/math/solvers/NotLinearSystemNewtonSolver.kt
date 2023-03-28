@@ -21,7 +21,7 @@ class NotLinearSystemNewtonSolver : NotLinearSystemSolver<SearchInterval, Newton
         var x0 = interval.left
         var y0 = interval.right
 
-        val eps = 0.1f
+        val eps = 0.01f
         //todo
 
         val je = system.jacobianEquations
@@ -46,15 +46,22 @@ class NotLinearSystemNewtonSolver : NotLinearSystemSolver<SearchInterval, Newton
             x1 = matrixAnswer[0] + x0
             y1 = matrixAnswer[1] + y0
 
-            if (abs(x1 - x0) <= eps && abs(y1 - y0) <= eps) {
+//            if (abs(x1 - x0) <= eps && abs(y1 - y0) <= eps) {
+//                println("${x1 - x0} ${y1 - y0}")
+//                break
+//            }
+            if (abs(system.firstEquation(x1, y1)) <= eps && abs(system.secondEquation(x1, y1)) <= eps) {
+//                println("${x1 - x0} ${y1 - y0}")
                 break
             }
-
             x0 = x1
             y0 = y1
         } while (it < 10000)
         if (it == 10000) {
-            return NewtonSystemAnswer(-1)
+            answer.status = -1
+            answer.i = it
+            answer.system
+            answer.interval
         }
 
         answer.x = x1

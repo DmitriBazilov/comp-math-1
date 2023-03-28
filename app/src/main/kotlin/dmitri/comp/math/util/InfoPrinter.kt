@@ -57,7 +57,7 @@ class InfoPrinter {
 
     fun printNewtonAnswer(answer : NewtonSystemAnswer) {
         if (answer.status != 0) {
-            println("Начальное приближение равноудаленно от точек решения")
+            println("Корень не был найден")
         } else {
             println("Решение системы на данном интервале: " + answer.x + ", " + answer.y)
         }

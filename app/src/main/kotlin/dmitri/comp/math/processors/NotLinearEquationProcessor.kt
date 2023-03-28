@@ -64,6 +64,7 @@ class NotLinearEquationProcessor : MethodProcessor {
         var answer = solver!!.solve(searchInterval!!, equations[equationNumber - 1], eps)
 
         println(answer)
+        println(equations[equationNumber - 1].f(answer.x))
 
         GraphicDrawer().showEquation(answer, searchInterval!!)
     }

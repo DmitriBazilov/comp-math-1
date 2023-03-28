@@ -73,8 +73,18 @@ class NotLinearSystemNewtonProcessor : MethodProcessor {
             else SecondSystem())
 
         InfoPrinter().printNewtonAnswer(answer)
+        println("Колво итераций: " + answer.i)
+        if (answer.status == 0) {
+            if (systemNumber == 1) {
+                println(FirstSystem().firstEquation.invoke(answer.x!!, answer.y!!))
+                println(FirstSystem().secondEquation.invoke(answer.x!!, answer.y!!))
 
-        GraphicDrawer().showSystem(answer)
+            } else {
+                println(SecondSystem().firstEquation.invoke(answer.x!!, answer.y!!))
+                println(SecondSystem().secondEquation.invoke(answer.x!!, answer.y!!))
+            }
+            GraphicDrawer().showSystem(answer)
+        }
     }
 
 }

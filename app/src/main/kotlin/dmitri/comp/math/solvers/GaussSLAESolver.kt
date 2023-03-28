@@ -49,7 +49,7 @@ class GaussSLAESolver : SLAESolver<SLAEAnswer> {
         answer.swaps = swaps
         answer.roots = roots
         answer.det = getDetFromTriangle(matrix) * (-1.0).pow(swaps.toDouble())
-        answer.discrepancies = getDiscrepancies(matrix, roots)
+//        answer.discrepancies = getDiscrepancies(matrix, roots)
         answer.triangleMatrix = matrix
         return answer
         return null
