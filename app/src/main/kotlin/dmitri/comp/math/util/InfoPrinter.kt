@@ -34,7 +34,7 @@ class InfoPrinter {
         println()
     }
 
-    public fun printSLAEAnswer(answer : SLAEAnswer) {
+    fun printSLAEAnswer(answer : SLAEAnswer) {
         println(answer.status.message)
         printDelimiter()
         if (answer.status == SLAEAnswer.GaussResult.OK) {
