@@ -3,9 +3,10 @@ package dmitri.comp.math.processors
 import dmitri.comp.math.entity.IntegralAnswer
 import dmitri.comp.math.entity.NotLinearEquationAnswer
 import dmitri.comp.math.entity.SearchInterval
-import dmitri.comp.math.interfaces.IntegralSolver
-import dmitri.comp.math.interfaces.MethodProcessor
-import dmitri.comp.math.interfaces.NotLinearEquationSolver
+import dmitri.comp.math.equation.QuadraticEquation
+import dmitri.comp.math.equation.ThirdDegreeEquation
+import dmitri.comp.math.equation.TranscendentalEquation
+import dmitri.comp.math.interfaces.*
 import dmitri.comp.math.reader.InfoUserReader
 import dmitri.comp.math.solvers.*
 import java.util.*
@@ -17,26 +18,82 @@ class IntegralProcessor: MethodProcessor {
     val scanner: Scanner = Scanner(System.`in`)
     val infoReader = InfoUserReader(scanner)
 
-    val methods: Map<Int, IntegralSolver<IntegralAnswer>> = mapOf(
-        Pair(2, IntegralSimpsonSolver()),
-        Pair(3, IntegralTrapezoidSolver())
+    val methods = listOf<IntegralSolver<IntegralAnswer>>(
+            IntegralSimpsonSolver(),
+            IntegralTrapezoidSolver(),
+            IntegralLeftRectangleSolver(),
+            IntegralMediumRectangleSolver(),
+            IntegralRightRectangleSolver()
+    );
+
+    val methodsName = listOf<String>(
+            "Метод Симпсона",
+            "Метод трапеции",
+            "Метод левых прямоугольников",
+            "Метод средних прямоугольников",
+            "Метод правых прямоугольников"
     )
 
-    var methodNumber: Int = 0
+    val equations = listOf<Equation>(
+            QuadraticEquation(),
+            ThirdDegreeEquation(),
+            TranscendentalEquation()
+    )
+
+    var methodNumber = 0;
+
+    var equationNumber = 0;
+
+    val userReader : InfoUserReader = InfoUserReader(Scanner(System.`in`))
+
+    var interval : SearchInterval? = null;
+
+    var eps : Double = 0.0
 
     override fun processMethod() {
-        readMethod()
-        if (methodNumber == 1) {
-            IntegralRectangleProcessor().processMethod()
-            return
-        } else {
-            TODO()
-//            methods[methodNumber]!!.solve()
+
+        for (s : String in methodsName) {
+            println("\t-$s")
         }
-    }
 
-    private fun readMethod() {
+        do {
+            print("Введите номер метода: ")
+            var number = userReader.readMode()
+            if (number in 1..methods.size) {
+                methodNumber = number;
+            }
 
+        } while (methodNumber == 0)
+
+        for (e : Equation in equations) {
+            println(e)
+        }
+
+        do {
+            print("Введите номер уравнения: ")
+            var number = userReader.readMode()
+            if (number in 1..equations.size) {
+                equationNumber = number
+            }
+        } while (equationNumber == 0)
+
+        do {
+            print("Введите интервал: ")
+            var userInterval = userReader.readInterval()
+            if (userInterval.left < userInterval.right) {
+                interval = userInterval
+            }
+        } while (interval == null)
+
+        do {
+            print("Введите точность: ")
+            var eps = userReader.readEpsilon()
+            this.eps = eps
+        } while (eps == 0.0)
+
+        var answer = methods.get(methodNumber - 1).solve(interval!!, equations[equationNumber - 1], eps)
+
+        println(answer)
     }
 
 }
