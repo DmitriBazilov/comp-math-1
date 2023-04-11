@@ -9,6 +9,7 @@ import dmitri.comp.math.equation.TranscendentalEquation
 import dmitri.comp.math.interfaces.*
 import dmitri.comp.math.reader.InfoUserReader
 import dmitri.comp.math.solvers.*
+import dmitri.comp.math.util.InfoPrinter
 import java.util.*
 
 class IntegralProcessor: MethodProcessor {
@@ -58,42 +59,71 @@ class IntegralProcessor: MethodProcessor {
 
         do {
             print("Введите номер метода: ")
-            var number = userReader.readMode()
-            if (number in 1..methods.size) {
-                methodNumber = number;
+            try {
+                var number = userReader.readMode()
+                if (number in 1..methods.size) {
+                    methodNumber = number;
+                }
+            } catch (ex : InputMismatchException) {
+                scanner.nextLine()
+            } catch (ex: NoSuchElementException) {
+                scanner.close()
+                return
             }
 
         } while (methodNumber == 0)
 
         for (e : Equation in equations) {
-            println(e)
+            println("\t-${e.eq}")
         }
 
         do {
             print("Введите номер уравнения: ")
-            var number = userReader.readMode()
-            if (number in 1..equations.size) {
-                equationNumber = number
+            try {
+                var number = userReader.readMode()
+                if (number in 1..equations.size) {
+                    equationNumber = number
+                }
+            } catch (ex: InputMismatchException) {
+                scanner.nextLine()
+            } catch (ex: NoSuchElementException) {
+                scanner.close()
+                return
             }
         } while (equationNumber == 0)
 
         do {
             print("Введите интервал: ")
-            var userInterval = userReader.readInterval()
-            if (userInterval.left < userInterval.right) {
-                interval = userInterval
+            try {
+                var userInterval = userReader.readInterval()
+                if (userInterval.left < userInterval.right) {
+                    interval = userInterval
+                }
+            } catch (ex: InputMismatchException) {
+                scanner.nextLine()
+            } catch (ex: NoSuchElementException) {
+                scanner.close()
+                return
             }
+
         } while (interval == null)
 
         do {
             print("Введите точность: ")
-            var eps = userReader.readEpsilon()
-            this.eps = eps
+            try {
+                var eps = userReader.readEpsilon()
+                this.eps = eps
+            } catch (ex: InputMismatchException) {
+                scanner.nextLine()
+            } catch (ex: NoSuchElementException) {
+                scanner.close()
+                return
+            }
         } while (eps == 0.0)
 
-        var answer = methods.get(methodNumber - 1).solve(interval!!, equations[equationNumber - 1], eps)
+        var answer = methods[methodNumber - 1].solve(interval!!, equations[equationNumber - 1], eps)
 
-        println(answer)
+        InfoPrinter().printIntegralAnswer(answer)
     }
 
 }

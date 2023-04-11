@@ -1,5 +1,6 @@
 package dmitri.comp.math.util
 
+import dmitri.comp.math.entity.IntegralAnswer
 import dmitri.comp.math.entity.Matrix
 import dmitri.comp.math.entity.NewtonSystemAnswer
 import dmitri.comp.math.entity.SLAEAnswer
@@ -60,6 +61,15 @@ class InfoPrinter {
             println("Начальное приближение равноудаленно от точек решения")
         } else {
             println("Решение системы на данном интервале: " + answer.x + ", " + answer.y)
+        }
+    }
+
+    fun printIntegralAnswer(answer: IntegralAnswer) {
+        if (answer.status != 0) {
+            println("Не получилось решить интеграл")
+        } else {
+            println("Приближенное решение интеграла для уравнения ${answer.equation.eq} на интервале ${answer.interval} = ${answer.answer}")
+            println("Решение было найдено за ${answer.it} итераций")
         }
     }
 }
