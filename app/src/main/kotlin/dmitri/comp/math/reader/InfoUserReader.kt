@@ -1,12 +1,14 @@
 package dmitri.comp.math.reader
 
+import dmitri.comp.math.entity.Point
 import dmitri.comp.math.entity.SearchInterval
 import dmitri.comp.math.entity.UserInfo
 import dmitri.comp.math.interfaces.UserReader
+import dmitri.comp.math.util.InfoPrinter
 import java.util.InputMismatchException
 import java.util.Scanner
 import kotlin.NoSuchElementException
-import kotlin.jvm.Throws
+import kotlin.Throws
 
 class InfoUserReader(private var scanner: Scanner) : UserReader<UserInfo> {
     override fun read(): UserInfo {
@@ -47,6 +49,13 @@ class InfoUserReader(private var scanner: Scanner) : UserReader<UserInfo> {
     fun readEpsilon() : Double {
         var eps = scanner.nextDouble()
         return eps
+    }
+
+    @Throws(InputMismatchException::class, NoSuchElementException::class)
+    fun readPoint() : Point {
+        var x = scanner.nextDouble()
+        var y = scanner.nextDouble()
+        return Point(x, y)
     }
 
 }
