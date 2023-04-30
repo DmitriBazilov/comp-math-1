@@ -22,8 +22,6 @@ class NotLinearSystemNewtonSolver : NotLinearSystemSolver<SearchInterval, Newton
         var y0 = interval.right
 
         val eps = 0.1f
-        //todo
-
         val je = system.jacobianEquations
 
         var matrix : Array<Array<Double>> = Array(2) { Array(3) { 0.0 } }

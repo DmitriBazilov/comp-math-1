@@ -2,7 +2,7 @@ package dmitri.comp.math.interfaces
 
 import dmitri.comp.math.entity.Point
 
-interface ApproximationSolver {
+interface ApproximationSolver<R> {
 
-    fun solve(size: Int, points: List<Point>)
+    fun solve(size: Int, points: List<Point>) : R
 }

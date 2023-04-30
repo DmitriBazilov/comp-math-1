@@ -2,15 +2,17 @@ package dmitri.comp.math.graphics
 
 import dmitri.comp.math.entity.NewtonSystemAnswer
 import dmitri.comp.math.entity.NotLinearEquationAnswer
+import dmitri.comp.math.entity.Point
 import dmitri.comp.math.entity.SearchInterval
 import dmitri.comp.math.interfaces.EquationSystem
+import dmitri.comp.math.util.InfoPrinter
 import org.math.plot.Plot2DPanel
 import java.awt.Color
 import javax.swing.JFrame
 
 
 class GraphicDrawer {
-    fun showEquation(answer: NotLinearEquationAnswer, interval: SearchInterval) {
+    fun showNotLinearEquation(answer: NotLinearEquationAnswer, interval: SearchInterval) {
 
         // create your PlotPanel (you can use it as a JPanel)
         val plot = Plot2DPanel()
@@ -23,13 +25,39 @@ class GraphicDrawer {
             }, interval
         )
 
-//        Point2D point2D = new Point2D.Double(answer.getX(), 0);
-
-        // put the PlotPanel in a JFrame, as a JPanel
         val frame = JFrame("Ответ")
         frame.setSize(800, 600)
         frame.contentPane = plot
         frame.isVisible = true
+    }
+
+    fun showApproximateLines(graphPoints: List<Point>, approximatePoints: List<Point>) {
+        val plot = Plot2DPanel()
+        addLineByDots(plot, "graph", Color.GREEN, graphPoints)
+        addLineByDots(plot, "approximation", Color.RED, approximatePoints)
+
+        val frame = JFrame("Ответ")
+        frame.setSize(800, 600)
+        frame.contentPane = plot
+        frame.isVisible = true
+    }
+
+    fun addLineByDots(plot: Plot2DPanel, name: String, color: Color, line: List<Point>) {
+        InfoPrinter().printArray(line.toTypedArray())
+        plot.addLinePlot(
+            name,
+            color,
+            line
+                .asSequence()
+                .map { it.x }
+                .toList()
+                .toDoubleArray(),
+            line
+                .asSequence()
+                .map { it.y }
+                .toList()
+                .toDoubleArray()
+        )
     }
 
     fun showSystem(answer: NewtonSystemAnswer) {
@@ -62,6 +90,8 @@ class GraphicDrawer {
         val y0 = doubleArrayOf(interval.right + 2, 0.0)
         plot.addLinePlot("y=0", Color.DARK_GRAY, x0, y0)
     }
+
+
 
     private fun addSystemOnGraph(plot: Plot2DPanel, system: EquationSystem, interval: SearchInterval) {
         addEquationOnGraph(plot, system::firstEquation.get(), interval)

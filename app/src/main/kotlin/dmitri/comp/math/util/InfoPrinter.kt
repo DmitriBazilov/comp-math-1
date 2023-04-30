@@ -1,9 +1,6 @@
 package dmitri.comp.math.util
 
-import dmitri.comp.math.entity.IntegralAnswer
-import dmitri.comp.math.entity.Matrix
-import dmitri.comp.math.entity.NewtonSystemAnswer
-import dmitri.comp.math.entity.SLAEAnswer
+import dmitri.comp.math.entity.*
 import java.math.BigDecimal
 
 class InfoPrinter {
@@ -70,6 +67,18 @@ class InfoPrinter {
         } else {
             println("Приближенное решение интеграла для уравнения ${answer.equation.eq} на интервале ${answer.interval} = ${answer.answer}")
             println("Решение было найдено за ${answer.it} итераций")
+        }
+    }
+
+    fun printApproximationAnswer(answer: ApproximationAnswer) {
+        println("Итог")
+        if (answer.status != 0) {
+            println("Найти аппроксимацию не удалось")
+        } else {
+            println("Наилучшая аппроксимация: ${answer.name}.")
+            println("Неточность: ${answer.mnk}")
+            print("Коэффициенты: ")
+            InfoPrinter().printArray(answer.coef.toTypedArray())
         }
     }
 }

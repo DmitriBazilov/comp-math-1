@@ -1,14 +1,13 @@
-package dmitri.comp.math.`approximation-methods`
+package dmitri.comp.math.approximation_methods
 
 import dmitri.comp.math.entity.Matrix
 import dmitri.comp.math.entity.Point
 import dmitri.comp.math.entity.SLAEAnswer
 import dmitri.comp.math.solvers.GaussSLAESolver
 import dmitri.comp.math.util.ApproximationCounter
-import java.util.*
 
 
-class SquareMethod {
+class SquareMethod : Method {
 
     private var SX = 0.0
     private var SY = 0.0
@@ -20,7 +19,7 @@ class SquareMethod {
     private var SXY = 0.0
     private var SXXY = 0.0
 
-    fun solve(points: List<Point>): List<Double?> {
+    override fun solve(points: List<Point>): List<Double>? {
         val n: Int = points.size
 
         for (p in points) {
@@ -39,10 +38,9 @@ class SquareMethod {
         matrix[0] = arrayOf(n.toDouble(), SX, SXX, SY)
         matrix[1] = arrayOf(SX, SXX, SXXX, SXY)
         matrix[2] = arrayOf(SXX, SXXX, SXXXX, SXXY)
-        val answer: SLAEAnswer? = GaussSLAESolver().solve(Matrix(3, matrix))
-
-
-        val x0 = answer!!.roots!![0]
+        val answer: SLAEAnswer = GaussSLAESolver().solve(Matrix(3, matrix)) ?: return null
+        if (answer.status != SLAEAnswer.GaussResult.OK) return null
+        val x0 = answer.roots!![0]
         val x1 = answer.roots!![1]
         val x2 = answer.roots!![2]
 

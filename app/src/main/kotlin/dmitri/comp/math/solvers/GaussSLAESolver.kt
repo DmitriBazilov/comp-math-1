@@ -52,7 +52,6 @@ class GaussSLAESolver : SLAESolver<SLAEAnswer> {
         answer.discrepancies = getDiscrepancies(matrix, roots)
         answer.triangleMatrix = matrix
         return answer
-        return null
     }
 
     private fun getDiscrepancies(matrix: Matrix, roots: DoubleArray) : Array<String> {

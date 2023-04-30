@@ -65,7 +65,7 @@ class NotLinearEquationProcessor : MethodProcessor {
 
         println(answer)
 
-        GraphicDrawer().showEquation(answer, searchInterval!!)
+        GraphicDrawer().showNotLinearEquation(answer, searchInterval!!)
     }
 
     private fun readMethod() {
