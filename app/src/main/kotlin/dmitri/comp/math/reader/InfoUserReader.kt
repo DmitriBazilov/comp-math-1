@@ -100,7 +100,7 @@ class InfoUserReader(private var scanner: Scanner) {
     @Throws(InputMismatchException::class, NoSuchElementException::class)
     fun readPointsNumber() : Int {
         if (mode == 1) {
-            print("Введите число точек")
+            print("Введите число точек: ")
         }
         return scanner.nextInt()
     }

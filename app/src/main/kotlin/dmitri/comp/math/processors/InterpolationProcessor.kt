@@ -1,11 +1,13 @@
 package dmitri.comp.math.processors
 
 import dmitri.comp.math.entity.Point
+import dmitri.comp.math.entity.SearchInterval
 import dmitri.comp.math.interfaces.InterpolationSolver
 import dmitri.comp.math.interfaces.MethodProcessor
 import dmitri.comp.math.reader.InfoUserReader
 import dmitri.comp.math.solvers.interpolation.InterpolationLagrangeSolver
 import dmitri.comp.math.solvers.interpolation.InterpolationNewtonSolver
+import dmitri.comp.math.util.FiniteDifferenceCounter
 import java.io.File
 import java.util.*
 import kotlin.math.sin
@@ -47,26 +49,58 @@ class InterpolationProcessor : MethodProcessor {
 
     var interpolationPoint = Double.MIN_VALUE
 
-    override fun processMethod() {
-//        readInputMethod()
-//        if (readMethod == 2) {
-//            reader = InfoUserReader(Scanner())
-//        }
+    var solverMethod = -1
 
+    override fun processMethod() {
         readMode()
+        readSolverMethod()
         if (modeNumber == 1) {
             readInputMethod()
+            readInterpolationPoint()
             if (readMethod == 2) {
                 readFile()
                 reader = InfoUserReader(Scanner(userFile))
+                reader.mode = 2
             }
             readPoints()
-            readInterpolationPoint()
         } else if (modeNumber == 2) {
-
+            readFunction()
+            print("Введите интервал: ")
+            var interval = reader.readInterval()
+            readPointsNumber()
+            makeDots(functions[functionNumber]!!, interval, pointsNumber)
+            readInterpolationPoint()
+            points.forEach {print("$it ")}
         }
 
+        var coefs : DoubleArray = methods[solverMethod - 1].solve(points)
+        if (solverMethod == 1) {
+            println("Коэффициенты лагранжа")
+            coefs.forEach { print(String.format("%.3f ", it)) }
+            println()
+            println("Результат для Лагранжа: " + methods[solverMethod - 1].getResult(interpolationPoint, points, coefs))
+        } else {
+            println("Коэффициенты Ньютона")
+            coefs.forEach { print(String.format("%.3f ", it)) }
+            println()
+            println("Результат для Ньютона: " + methods[solverMethod - 1].getResult(interpolationPoint, points, coefs))
+            var finiteDiffs = FiniteDifferenceCounter().count(points)
+            for (i in finiteDiffs.indices) {
+                for (j in finiteDiffs[i].indices) {
+                    print(
+                        String.format("%7.3f ", finiteDiffs[i][j])
+                    )
+                }
+                println()
+                println("-------------------------------------------------")
+            }
+        }
 
+    }
+
+    private fun readSolverMethod() {
+        print("Выберите метод интерполяции(1-Лагранж, 2-Ньютон): ")
+        solverMethod = reader.readMode()
     }
 
     private fun readInterpolationPoint() {
@@ -89,11 +123,11 @@ class InterpolationProcessor : MethodProcessor {
 
     fun readFunction() {
         println("Выберите функцию")
-        functionsName.forEachIndexed { index, s -> println("$index. $s") }
+        functionsName.forEachIndexed { index, s -> println("${index + 1}. $s") }
         do {
             try {
                 var number = reader.readMode()
-                if (number in functionsName.indices) {
+                if (number in 1..functionsName.size) {
                     functionNumber = number
                 }
             } catch (ex : InputMismatchException) {
@@ -153,5 +187,16 @@ class InterpolationProcessor : MethodProcessor {
                 exitProcess(-1)
             }
         } while (modeNumber == -1)
+    }
+
+    fun makeDots(func: (x : Double) -> Double, interval : SearchInterval, n : Int ) {
+        var result = mutableListOf<Point>()
+        var h = (interval.right - interval.left) / (n - 1)
+        var left = interval.left
+        for (i in 0 until n) {
+            result.add(Point(left, func(left)))
+            left += h
+        }
+        points = result
     }
 }
